@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { app } from './service/Firebase'
 import { getDatabase, ref, onValue, query, set } from 'firebase/database'
+import addNotification from 'react-push-notification'
 import './App.scss'
+import Image from './image/image.png'
+import Image2 from './image/image2.png'
 
 const database = getDatabase(app)
 const dbRef = ref(database, 'status')
@@ -19,20 +22,36 @@ function App() {
     })
   }, [])
 
+  useEffect(() => {
+    if (status === 'Waiting') {
+      addNotification({
+        title: 'Arduino Notification',
+        message: 'ระบบเสร็จสิ้นการทำงานและรอการรดน้ำเพื่อเพิ่มความชื้น',
+        native: true,
+      })
+    }
+  }, [status])
+
   const handleNextStage = async () => {
     await set(dbRef, 'Standby')
   }
 
   return (
     <div className="App">
+      {status === 'Working' ? <div className="gradient" /> : null}
+      {status === 'Waiting' ? <div className="gradient-waiting" /> : null}
       <h1 className="header">Arduino Project</h1>
       <div className="container">
         <h3>สถานะอุปกรณ์</h3>
         <div className="row">
           {status === 'Standby' ? (
-            <div className="switcher-standby" onClick={() => handleWorking()}></div>
+            <div className="switcher-standby" onClick={() => handleWorking()}>
+              <img src={Image2} alt="imageStandby" className="image" />
+            </div>
           ) : (
-            <div className="switcher"></div>
+            <div className="switcher">
+              <img src={Image} alt="imageSpin" className="spin-image" />
+            </div>
           )}
           <div className="statusPanel">
             <p className={status}>
