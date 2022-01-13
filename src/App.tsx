@@ -10,17 +10,21 @@ const database = getDatabase(app)
 const dbRef = ref(database, 'status')
 
 function App() {
-  const [status, setStatus] = useState<string>('Standby')
+  const [status, setStatus] = useState<string>('Standby') // Status state
 
   const handleWorking = async () => {
     await set(dbRef, 'Working')
-  }
+  } // Set status to Working
+
+  const handleNextStage = async () => {
+    await set(dbRef, 'Standby')
+  } // Set Status to Standby
 
   useEffect(() => {
     onValue(query(dbRef), (snapshot) => {
       setStatus(snapshot.val())
     })
-  }, [])
+  }, []) // Get Data from Google Firebase
 
   useEffect(() => {
     if (status === 'Waiting') {
@@ -30,11 +34,7 @@ function App() {
         native: true,
       })
     }
-  }, [status])
-
-  const handleNextStage = async () => {
-    await set(dbRef, 'Standby')
-  }
+  }, [status]) // Read change on state if change = Waiting status then show notification
 
   return (
     <div className="App">
@@ -96,7 +96,8 @@ function App() {
           </ul>
         </div>
       </div>
-    </div>
+      <p className="credit">2022 © Phubordin Poolnai and his friends</p>
+    </div> 
   )
 }
 
