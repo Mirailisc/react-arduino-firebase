@@ -91,6 +91,7 @@
             @media screen and (max-width: 565px) {
                 flex-direction: column;
                 gap: 20px;
+                width: 100%;
 
                 .statusPanel {
                     width: 80%;
@@ -142,6 +143,7 @@
 
                 @media screen and (max-width: 565px) {
                     padding: 10px 25px 10px 25px;
+                    width: 85%;
                 }
 
                 & > p {
