@@ -13,10 +13,6 @@ function App() {
     await set(dbRef, 'Working')
   }
 
-  const handleStandby = async () => {
-    await set(dbRef, 'Standby')
-  }
-
   useEffect(() => {
     onValue(query(dbRef), (snapshot) => {
       setStatus(snapshot.val())
@@ -36,7 +32,7 @@ function App() {
           {status === 'Standby' ? (
             <div className="switcher-standby" onClick={() => handleWorking()}></div>
           ) : (
-            <div className="switcher" onClick={() => handleStandby()}></div>
+            <div className="switcher"></div>
           )}
           <div className="statusPanel">
             <p className={status}>
