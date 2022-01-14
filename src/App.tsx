@@ -101,13 +101,13 @@ function App() {
           <h3>สถานะทั้งหมด</h3>
           <ul>
             <li>
-              <span className="ready">Ready: </span>ระบบกำลังรอการดำเนินการ
+              <span className="ready">Ready: </span>ระบบอยู่ในสถานะพร้อมใช้งาน
             </li>
             <li>
-              <span className="working">Working: </span>มอเตอร์กำลังทำงานอยู่
+              <span className="working">Working: </span>ระบบอยู่ในสถานะทำงาน (มอเตอร์ทำงาน)
             </li>
             <li>
-              <span className="needWater">Need Water: </span>ระบบกำลังรอการรดน้ำ
+              <span className="needWater">Need Water: </span>ระบบอยู่ในสถานะกำลังรอการรดน้ำ
             </li>
           </ul>
         </div>
