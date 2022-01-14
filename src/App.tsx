@@ -12,7 +12,7 @@ const dbStatus = ref(database, 'status')
 const dbSkip = ref(database, 'isSkip')
 
 function App() {
-  const [status, setStatus] = useState<string>('Stand by') // Status state
+  const [status, setStatus] = useState<string>('Ready') // Status state
   const [check, setCheck] = useState<boolean>(false)
 
   const handleWorking = () => {
@@ -20,8 +20,8 @@ function App() {
   } // Set status to Working
 
   const handleNextStage = () => {
-    set(dbStatus, 'Stand by')
-  } // Set Status to Stand by
+    set(dbStatus, 'Ready')
+  } // Set Status to Ready
 
   useEffect(() => {
     onValue(query(dbStatus), (snapshot) => {
@@ -38,26 +38,26 @@ function App() {
   }
 
   useEffect(() => {
-    if (status === 'Waiting') {
+    if (status === 'Need Water') {
       addNotification({
         title: 'Arduino Notification',
         message: 'ระบบเสร็จสิ้นการทำงานและรอการรดน้ำเพื่อเพิ่มความชื้น',
         native: true,
       })
     }
-  }, [status]) // Read change on state if change = Waiting status then show notification
+  }, [status]) // Read change on state if change = Need Water status then show notification
 
   return (
     <div className="App">
       {status === 'Working' ? <div className="gradient" /> : null}
-      {status === 'Waiting' ? <div className="gradient-waiting" /> : null}
+      {status === 'Need Water' ? <div className="gradient-needWater" /> : null}
       <h1 className="header">Arduino Project</h1>
       <div className="container">
         <h3>สถานะอุปกรณ์</h3>
         <div className="row">
-          {status === 'Stand by' ? (
-            <div className="switcher-standby" onClick={handleWorking}>
-              <img src={Image2} alt="imageStandby" className="image" />
+          {status === 'Ready' ? (
+            <div className="switcher-ready" onClick={handleWorking}>
+              <img src={Image2} alt="imageReady" className="image" />
             </div>
           ) : (
             <div className="switcher">
@@ -68,9 +68,9 @@ function App() {
             <p className={status}>
               <b>สถานะ: </b> {status}
             </p>
-            <p className={status === 'Waiting' ? 'waitingStatus' : 'notWaitingStatus'}>รอการรดน้ำ</p>
+            <p className={status === 'Need Water' ? 'waterStatus' : 'notWaterStatus'}>รอการรดน้ำ</p>
           </div>
-          {status === 'Waiting' ? (
+          {status === 'Need Water' ? (
             <div className="buttonGroup">
               <button className="done-water" onClick={handleNextStage}>
                 รดน้ำ
@@ -81,7 +81,7 @@ function App() {
             </div>
           ) : null}
         </div>
-        {status === 'Waiting' ? (
+        {status === 'Need Water' ? (
           <div className="buttonGroup-responsive">
             <button className="done-water" onClick={() => handleNextStage()}>
               รดน้ำแล้ว
@@ -101,13 +101,13 @@ function App() {
           <h3>สถานะทั้งหมด</h3>
           <ul>
             <li>
-              <span className="standby">Stand by: </span>ระบบกำลังรอการดำเนินการ
+              <span className="ready">Ready: </span>ระบบกำลังรอการดำเนินการ
             </li>
             <li>
               <span className="working">Working: </span>มอเตอร์กำลังทำงานอยู่
             </li>
             <li>
-              <span className="waiting">Waiting: </span>ระบบกำลังรอการรดน้ำ
+              <span className="needWater">Need Water: </span>ระบบกำลังรอการรดน้ำ
             </li>
           </ul>
         </div>

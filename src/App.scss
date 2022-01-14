@@ -6,14 +6,14 @@
         left: 0;
         right: 0;
         z-index: -1;
-        background: linear-gradient(#53B7FF, transparent);
+        background: linear-gradient(#FF7171, transparent);
         height: 20vh;
         animation: flickering 2s infinite;
     }
 
-    .gradient-waiting {
+    .gradient-needWater {
         @extend .gradient;
-        background: linear-gradient(#61D157, transparent);
+        background: linear-gradient(#53B7FF, transparent);
     }
 
     height: 100%;
@@ -124,7 +124,7 @@
                 }
             }
 
-            .switcher-standby {
+            .switcher-ready {
                 @extend .switcher;
                 background-color: #FFFFFF;
                 pointer-events: all;
@@ -155,18 +155,18 @@
                 }
 
                 .Working {
-                    color: #8F409C;
+                    color: #FF7171;
                 }
     
-                .Stand.by {
-                    color: #417DA9;
+                .Ready {
+                    color: #489C40;
                 }
     
-                .Waiting {
-                    color: #A9A9A9;
+                .Need.Water {
+                    color: #417DA9;;
                 }
 
-                .waitingStatus {
+                .waterStatus {
                     color: #FF7171;
                     text-align: center;
                     font-size: 30px;
@@ -174,8 +174,8 @@
                     animation: flickering 1s infinite;
                 }
 
-                .notWaitingStatus {
-                    @extend .waitingStatus;
+                .notWaterStatus {
+                    @extend .waterStatus;
                     visibility: hidden;
                 }
             }
@@ -235,7 +235,7 @@
             }
 
             .workingToggler {
-                color: #8F409C;
+                color: #FF7171;
             }
         }
 
@@ -251,15 +251,15 @@
             }
 
             .working {
-                color: #8F409C;
+                color: #FF7171;
             }
 
-            .standby {
-                color: #417DA9;
+            .ready {
+                color: #489C40;
             }
 
-            .waiting {
-                color: #A9A9A9;
+            .needWater {
+                color: #417DA9;;
             }
         }
     }
