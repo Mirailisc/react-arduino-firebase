@@ -27,7 +27,7 @@ function App() {
     if (event.keyCode === 82) {
       window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley";
     }
-  }, []);
+  }, []); //Secret Code 69
 
   useEffect(() => {
     document.addEventListener("keydown", keyDetect);
@@ -35,7 +35,7 @@ function App() {
     return () => {
       document.removeEventListener("keydown", keyDetect);
     };
-  }, [keyDetect]);
+  }, [keyDetect]); //Secret event 420
 
   useEffect(() => {
     onValue(query(dbStatus), (snapshot) => {
