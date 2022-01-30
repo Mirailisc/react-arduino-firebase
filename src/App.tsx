@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { app } from './service/Firebase'
 import { getDatabase, ref, onValue, query, set } from 'firebase/database'
 import addNotification from 'react-push-notification'
@@ -22,6 +22,20 @@ function App() {
   const handleNextStage = () => {
     set(dbStatus, 'Ready')
   } // Set Status to Ready
+
+  const keyDetect = useCallback((event) => {
+    if (event.keyCode === 82) {
+      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley";
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", keyDetect);
+
+    return () => {
+      document.removeEventListener("keydown", keyDetect);
+    };
+  }, [keyDetect]);
 
   useEffect(() => {
     onValue(query(dbStatus), (snapshot) => {
